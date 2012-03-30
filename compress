@@ -1,0 +1,14 @@
+#!/bin/bash
+# Minify/merge the CSS for {Client}:
+#
+# Must run this from the Typewriter root: ./compress/{filename}.sh
+
+cd ./themes/{clientdomain}/stylesheets/
+juicer -q merge screen.css
+gzip -c -9 screen.min.css > screen.gz.css
+rm ./screen.min.css
+
+# Compress the CampMinder styles:
+juicer -q merge cm-screen.css
+gzip -c -9 cm-screen.min.css > cm-screen.gz.css
+rm ./cm-screen.min.css

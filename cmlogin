@@ -1,0 +1,12 @@
+<form id="login" method="post" action="http://{cm client domain}.campintouch.com/Login.aspx">
+	<div>
+		<input type="hidden" name="remoteLogin" value="true">
+		<input type="hidden" name="redirectURL" value="http://{cm client domain}.campintouch.com/MyAccount.aspx" id="redirectURL">
+		<input type="hidden" name="loginFailedUrl" value="{Redirect here on fail}">
+
+		<input type="text" class="username" name="login">
+		<input type="password" class="password" name="password">
+		
+		<input type="submit" value="log in">
+	</div>
+</form>

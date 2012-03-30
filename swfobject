@@ -1,0 +1,18 @@
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+
+<script>
+var flashvars = {
+	autoPlay: "false",
+	controlBarAutoHide: "true",
+	playButtonOverlay: "true",
+	urlIncludesFMSApplicationInstance: true
+	};
+var params = {
+	allowfullscreen: "true",
+	allowscriptaccess: "always",
+	wmode: "transparent"
+	};
+var attributes = {};
+
+swfobject.embedSWF("/path/to/swf.swf", "elementIDhere", 500, 250, "10.1.0","/swf/expressInstall.swf", flashvars, params, attributes);
+</script>
