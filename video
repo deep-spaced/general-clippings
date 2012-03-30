@@ -1,0 +1,110 @@
+<!-- Place in head -->
+
+<script src="/js/library/modernizr.js"></script>
+<script src="/js/library/swfobject.js"></script>
+<script src="/js/library/video.js"></script>
+<link href="/css/library/video-js.css" rel="stylesheet" type="text/css">
+
+<!-- Place in head or play.js file -->
+
+<script>
+/************************
+* Global variables.
+************************/
+var player;
+var html5 = false;
+var isModal = false;
+var video = 'promo';
+
+// Mobile detection. Set accordingly.
+var android = false;
+
+// Sources
+var streamingSrc = 'rtmp://videos.domain.com/cfx/st/mp4:';
+var downloadSrc = 'http://videos-download.domain.com/';
+var posterSrc = 'http://videos-download.domain.com/img/posters/';
+
+// Flash player variable setup
+var flashvars = {
+	autoPlay: "false",
+	controlBarAutoHide: "true",
+	playButtonOverlay: "true",
+	urlIncludesFMSApplicationInstance: true
+	};
+var params = {
+	allowfullscreen: "true",
+	allowscriptaccess: "always",
+	wmode: "transparent"
+	};
+var attributes = {};
+
+/************************
+* Load
+************************/
+$(function() {
+	loadVideo();
+});
+
+function loadVideo() {
+	html5 = (Modernizr.video ? true : false);
+	if( swfobject.hasFlashPlayerVersion("10.1.0") && !android ) {
+		// Load the Flash streaming video
+		flashvars.src = streamingSrc+video+'.mp4';
+		flashvars.poster = posterSrc+video+'.jpg';
+		swfobject.embedSWF("http://fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf", "videoPlayer", 478, 269, "10.1.0","/swf/expressInstall.swf", flashvars, params, attributes);
+	} else if(html5) {
+		// Load the HTML5 video.
+		player = _V_("videoPlayer");
+
+		// Update the sources:
+		player.src([
+			{ type: "video/mp4", src: downloadSrc+video+'.mp4' },
+			{ type: "video/webm", src: downloadSrc+'webm/'+video+'.webm' }
+		]);
+		$('#videoPlayer').attr('poster', posterSrc+video+'.jpg');
+
+		player.play();
+	} else {
+		// Show static image, copying settings from video element.
+		var fallback = $('<img />');
+		fallback.src = posterSrc+video+'.jpg';
+		fallback.attr('width', $('#videoPlayer').attr('width'));
+		fallback.attr('height', $('#videoPlayer').attr('height'));
+		$('#videoPlayer').remove();
+		$('#videoWrapper').append(fallback);
+	}
+}
+
+// Include only for swapping video by URL parameter;
+// URL = /camp-videos?video=archery
+// Loads the archery video.
+/*
+var urlParams = {};
+function loadURLParams() {
+	var e,
+		a = /\+/g,  // Regex for replacing addition symbol with a space
+		r = /([^&=]+)=?([^&]*)/g,
+		d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+		q = window.location.search.substring(1);
+
+	while (e = r.exec(q))
+	   urlParams[d(e[1])] = d(e[2]);
+}
+
+$(function() {
+	loadURLParams();
+	video = urlParams['video'];
+});
+*/
+
+</script>
+
+<!-- Place in body -->
+
+<div id="videoWrapper" class="video-js-box">
+	<video id="videoPlayer" class="video-js" width="478" height="268" controls="controls" preload="auto" poster="http://videos-download.domain.com/img/posters/video.jpg" >
+		<!-- These are the default videos -->
+		<source id="vidMP4src" src="http://videos-download.domain.com/promo.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+		<source id="vidWEBmsrc" src="http://videos-download.domain.com/webm/promo.webm" type='video/webm; codecs="vp8, vorbis"' />
+	</video>
+</div> <!-- end #videoWrapper -->
