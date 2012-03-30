@@ -1,0 +1,11 @@
+<!-- Goes in head. -->
+<meta property="fb:app_id" content="310254365674281"/>
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+
+<!-- Goes right after body tag -->
+<div id="fb-root"></div>
+
+<!-- Shows comments -->
+<div id="respond">
+	<fb:comments href="{link to blog post}" num_posts="{20}" width="{450}"></fb:comments>
+</div>

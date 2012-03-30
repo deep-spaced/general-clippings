@@ -75,27 +75,15 @@ function loadVideo() {
 	}
 }
 
-// Include only for swapping video by URL parameter;
-// URL = /camp-videos?video=archery
-// Loads the archery video.
 /*
-var urlParams = {};
-function loadURLParams() {
-	var e,
-		a = /\+/g,  // Regex for replacing addition symbol with a space
-		r = /([^&=]+)=?([^&]*)/g,
-		d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-		q = window.location.search.substring(1);
+ * Need video switching by URL parameter? Use the urlparams snippet.
+ * URL = /camp-videos?video=archery
+ * Set in document.ready. Will then load a video with param of archery.
+ */
 
-	while (e = r.exec(q))
-	   urlParams[d(e[1])] = d(e[2]);
-}
-
-$(function() {
-	loadURLParams();
-	video = urlParams['video'];
-});
-*/
+/*
+ * Need onclick video switching? Use the videoswap snippet.
+ */
 
 </script>
 

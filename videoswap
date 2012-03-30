@@ -1,0 +1,6 @@
+	$('.videoButton a').click(function(){
+		video = $(this).attr('rel');
+		loadVideo();
+		
+		return false;
+	});
