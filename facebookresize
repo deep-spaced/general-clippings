@@ -1,0 +1,14 @@
+<div id="fb-root"></div> 
+<script type="text/javascript"> 
+  window.fbAsyncInit = function() {
+    FB.init({appId: '126139047465299', status: true, cookie: true, xfbml: true});
+  window.setTimeout(function() {
+    FB.Canvas.setAutoResize();
+  }, 250);
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = 'https://connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
